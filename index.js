@@ -8,13 +8,19 @@ const { dbConnection } = require("./src/database/dbconnecation");
 const AppError = require("./src/utils/AppError");
 const { allRequires } = require("./src/utils/indexRouter");
 // const allRequires = require("./src/utils/index.js");
+const cors = require("cors");
+
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+app.use(cors({}));
 if (process.env.MODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 // if (!fs.existsSync("./uploads")) {
 //   fs.mkdirSync("./uploads");
 // }
+
 allRequires(app);
 app.use(express.static("uploads"));
 app.all("*", (req, res, next) => {
