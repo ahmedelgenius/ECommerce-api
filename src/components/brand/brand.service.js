@@ -1,7 +1,7 @@
 process.on("uncaughtException", (err) => {
   console.log("uncaughtException", err);
 });
-const BrandModel = require("./Brand.model.js");
+const BrandModel = require("./brand.model");
 
 const factory = require("../Handlers/Hander.factory");
 const { catchAsyncError } = require("../../utils/catchAsyncErr.js");
