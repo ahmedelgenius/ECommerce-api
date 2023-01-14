@@ -13,7 +13,7 @@ exports.signin = catchAsyncError(async (req, res, next) => {
 
   let token = jwt.sign(
     { name: user.name, userId: user._id },
-    process.env.JWT_kEY
+    process.env.JWT_KEY
   );
 
   res.status(200).json({ token });
@@ -23,7 +23,7 @@ exports.ProtectedRoutes = catchAsyncError(async (req, res, next) => {
   let token = req.headers.token;
   if (!token) return next(new AppError("token not provided ", 401));
 
-  let decoded = jwt.verify(token, process.env.JWT_kEY);
+  let decoded = jwt.verify(token, process.env.JWT_KEY);
   let user = await UserModel.findById(decoded.userId);
   if (!user) return next(new AppError("User Not Found  ", 404));
 
